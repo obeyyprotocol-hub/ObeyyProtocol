@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<link rel="icon" type="image/png" href="fotos/logo.jpeg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obey Protocol Team | Portal de Artigos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+        
+        :root {
+            /* ==================== PERSONALIZE O BACKGROUND AQUI ==================== */
+            /* Cole a URL da sua imagem de background entre aspas */
+            --background-image: url('fotos/2.jpeg');
+            /* Ajuste a opacidade do background (0.0 a 1.0) */
+            --background-opacity: 0.15;
+            /* ===================================================================== */
+            
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a28;
+            --accent-cyan: #00ffff;
+            --accent-magenta: #ff00ff;
+            --accent-purple: #8b00ff;
+            --text-primary: #e0e0ff;
+            --text-secondary: #a0a0c0;
+            --grid-color: rgba(0, 255, 255, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Custom background image */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--background-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: var(--background-opacity);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 20s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        @keyframes gridScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+        
+        /* Glowing orbs background */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 3;
+        }
+        
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-cyan);
+            top: -100px;
+            left: -100px;
+            animation: float1 15s ease-in-out infinite;
+        }
+        
+        .orb2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-magenta);
+            bottom: -50px;
+            right: -50px;
+            animation: float2 20s ease-in-out infinite;
+        }
+        
+        .orb3 {
+            width: 350px;
+            height: 350px;
+            background: var(--accent-purple);
+            top: 50%;
+            left: 50%;
+            animation: float3 18s ease-in-out infinite;
+        }
+        
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, 100px) scale(1.1); }
+        }
+        
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-80px, -80px) scale(0.9); }
+        }
+        
+        @keyframes float3 {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(calc(-50% + 50px), calc(-50% - 50px)) scale(1.2); }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 15, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            letter-spacing: 3px;
+            animation: glitch 5s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translateX(0); }
+            92% { transform: translateX(-2px); }
+            94% { transform: translateX(2px); }
+        }
+        
+        /* Music Player */
+        .music-player {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
+        }
+        
+        .music-player button {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .music-player button:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .control-btn {
+            font-size: 1rem !important;
+            width: 35px !important;
+            height: 35px !important;
+            background: rgba(0, 255, 255, 0.2) !important;
+        }
+        
+        .control-btn:hover {
+            background: rgba(0, 255, 255, 0.4) !important;
+            transform: scale(1.1) !important;
+        }
+        
+        .music-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        
+        .music-title {
+            font-weight: 600;
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+        }
+        
+        .music-status {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Main content */
+        main {
+            padding: 4rem 0;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .intro h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .intro p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .article-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            animation: cardAppear 0.6s ease-out both;
+        }
+        
+        .article-card:nth-child(1) { animation-delay: 0.1s; }
+        .article-card:nth-child(2) { animation-delay: 0.2s; }
+        .article-card:nth-child(3) { animation-delay: 0.3s; }
+        .article-card:nth-child(4) { animation-delay: 0.4s; }
+        .article-card:nth-child(5) { animation-delay: 0.5s; }
+        .article-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(0, 255, 255, 0.1),
+                transparent
+            );
+            transition: left 0.5s ease;
+            z-index: 1;
+        }
+        
+        .article-card:hover::before {
+            left: 100%;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: 
+                0 20px 40px rgba(0, 255, 255, 0.3),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+        
+        .article-cover {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            transition: transform 0.4s ease;
+        }
+        
+        .article-card:hover .article-cover {
+            transform: scale(1.05);
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .article-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent-cyan);
+            line-height: 1.3;
+        }
+        
+        .article-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .article-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .read-btn {
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 25px;
+            color: var(--accent-cyan);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .read-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        /* PDF Viewer Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+        }
+        
+        .close-btn {
+            background: rgba(255, 0, 100, 0.2);
+            border: 1px solid #ff0064;
+            color: #ff0064;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: #ff0064;
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        .pdf-viewer {
+            flex: 1;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .pdf-viewer iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Audio visualizer */
+        .visualizer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            pointer-events: none;
+            z-index: 5;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 3px;
+            padding: 0 20px;
+            opacity: 0.5;
+        }
+        
+        .bar {
+            width: 4px;
+            background: linear-gradient(to top, var(--accent-cyan), var(--accent-magenta));
+            border-radius: 2px 2px 0 0;
+            animation: wave 1s ease-in-out infinite;
+        }
+        
+        .bar:nth-child(1) { animation-delay: 0s; }
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
+        .bar:nth-child(6) { animation-delay: 0.3s; }
+        .bar:nth-child(7) { animation-delay: 0.2s; }
+        .bar:nth-child(8) { animation-delay: 0.1s; }
+        .bar:nth-child(9) { animation-delay: 0s; }
+        .bar:nth-child(10) { animation-delay: 0.1s; }
+        .bar:nth-child(11) { animation-delay: 0.2s; }
+        .bar:nth-child(12) { animation-delay: 0.3s; }
+        .bar:nth-child(13) { animation-delay: 0.4s; }
+        .bar:nth-child(14) { animation-delay: 0.3s; }
+        .bar:nth-child(15) { animation-delay: 0.2s; }
+        
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 60px; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .music-player {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .music-info {
+                flex: 1;
+                min-width: 0;
+            }
+            
+            .music-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                height: 95vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background orbs -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    
+    <!-- Audio visualizer -->
+    <div class="visualizer">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>☢ Obey Protocol Team</h1>
+                <div class="music-player">
+                    <button id="prevBtn" class="control-btn" aria-label="Anterior">⏮</button>
+                    <button id="playPauseBtn" aria-label="Play/Pause">▶</button>
+                    <button id="nextBtn" class="control-btn" aria-label="Próxima">⏭</button>
+                    <div class="music-info">
+                        <div class="music-title" id="musicTitle">Carregando...</div>
+                        <div class="music-status" id="musicStatus">Pausado</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>Portal de Conhecimento Avançado</h2>
+                <p>O conhecimento caminha lado a lado com a ética social.</p>
+                <p>Site dedicado à propagação da ética social.</p>
+            </section>
+            
+            <section>
+                <h2 style="font-family: 'Orbitron', sans-serif; margin-bottom: 2rem; font-size: 2rem; text-align: center;">Artigos Disponíveis</h2>
+                <div class="articles-grid" id="articlesGrid">
+                    <!-- 
+                    ═══════════════════════════════════════════════════════════════
+                    ADICIONE SEUS ARTIGOS AQUI
+                    ═══════════════════════════════════════════════════════════════
+                    Para adicionar um novo artigo, copie e cole o template abaixo:
+                    -->
+                    
+                    <!-- TEMPLATE DE ARTIGO - COPIE DAQUI -->
+                    <div class="article-card" onclick="openPDF('arquivos/Covarde em uma guerra.pdf', 'Covarde em uma guerra')">
+                        <img src="fotos/02.jpeg" alt="Capa do artigo" class="article-cover">
+                        <div class="article-content">
+                            <h3>Covarde em ume Guerra</h3>
+                            <p>Quando um covarde está em uma guerra.</p>
+                            <div class="article-meta">
+                                <span class="article-date">15 Fev 2026</span>
+                                <button class="read-btn">LER</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ATÉ AQUI -->
+                    
+                    <!-- Artigo 2 -->
+                    <div class="article-card" onclick="openPDF('arquivos/Empatia - covardia e manipulação ético social.pdf', 'Empatia - covardia e manipulação ético social')">
+                        <img src="fotos/01.jpeg" alt="Capa do artigo" class="article-cover">
+                        <div class="article-content">
+                            <h3>Empatia - covardia e manipulação ético social</h3>
+                            <p>Um estudo sobre como psicopatas agem sob o campo da manipulação ética e social.</p>
+                            <div class="article-meta">
+                                <span class="article-date">15 Fev 2026</span>
+                                <button class="read-btn">LER</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Artigo 3 -->
+                    <div class="article-card" onclick="openPDF('artigos/empty.pdf', 'Coming soon')">
+                        <img src="fotos/coming_soon.jpeg" alt="Capa do artigo" class="article-cover">
+                        <div class="article-content">
+                            <h3>Coming soon</h3>
+                            <p>Empty arcticle...</p>
+                            <div class="article-meta">
+                                <span class="article-date">?? ?? ????</span>
+                                <button class="read-btn">LER</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 
+                    ═══════════════════════════════════════════════════════════════
+                    INSTRUÇÕES PARA ADICIONAR ARTIGOS:
+                    ═══════════════════════════════════════════════════════════════
+                    
+                    1. Copie o TEMPLATE DE ARTIGO acima
+                    2. Cole aqui embaixo
+                    3. Substitua:
+                       - 'COLE_O_LINK_DO_PDF_AQUI' → pelo link do seu PDF
+                       - URL da imagem → link da capa do artigo
+                       - Título do artigo
+                       - Descrição
+                       - Data
+                    
+                    DICA: Para imagens de capa, use:
+                    - Unsplash: https://unsplash.com
+                    - Pexels: https://pexels.com
+                    - Ou hospede suas próprias imagens
+                    ═══════════════════════════════════════════════════════════════
+                    -->
+                    
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- PDF Viewer Modal -->
+    <div class="modal" id="pdfModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Visualizador de Artigo</div>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="pdf-viewer" id="pdfViewer"></div>
+        </div>
+    </div>
+    
+    <!-- 
+    ═══════════════════════════════════════════════════════════════
+    CONFIGURAÇÃO DA PLAYLIST DE MÚSICAS
+    ═══════════════════════════════════════════════════════════════
+    Adicione suas músicas na lista abaixo seguindo o formato:
+    { title: "Nome da Música", src: "link-da-musica.mp3" }
+    
+    As músicas tocarão automaticamente em sequência!
+    -->
+    <audio id="bgMusic"></audio>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // ADICIONE SUAS MÚSICAS AQUI
+        // ═══════════════════════════════════════════════════════════════
+        const playlist = [
+            { 
+                title: "Música Ambiente 1", 
+                src: "songs/1.mp3" 
+            },
+            { 
+                title: "Música Ambiente 2", 
+                src: "songs/2.mp3" 
+            },
+            { 
+                title: "Música Ambiente 3", 
+                src: "songs/3.mp3" 
+            },
+              { 
+                title: "Música Ambiente 3", 
+                src: "songs/4.mp3" 
+            }
+            // Adicione mais músicas seguindo o mesmo formato acima
+        ];
+        // ═══════════════════════════════════════════════════════════════
+        
+        // Music player functionality
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const musicStatus = document.getElementById('musicStatus');
+        const musicTitle = document.getElementById('musicTitle');
+        const bgMusic = document.getElementById('bgMusic');
+        
+        let currentTrack = 0;
+        let isPlaying = false;
+        
+        // Carregar música atual
+        function loadTrack(index) {
+            if (playlist[index]) {
+                bgMusic.src = playlist[index].src;
+                musicTitle.textContent = playlist[index].title;
+                currentTrack = index;
+            }
+        }
+        
+        // Tocar música
+        function playMusic() {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                playPauseBtn.textContent = '⏸';
+                musicStatus.textContent = 'Tocando';
+            }).catch(e => {
+                console.log('Erro ao tocar música:', e);
+                musicStatus.textContent = 'Erro ao carregar';
+            });
+        }
+        
+        // Pausar música
+        function pauseMusic() {
+            bgMusic.pause();
+            isPlaying = false;
+            playPauseBtn.textContent = '▶';
+            musicStatus.textContent = 'Pausado';
+        }
+        
+        // Próxima música
+        function nextTrack() {
+            currentTrack = (currentTrack + 1) % playlist.length;
+            loadTrack(currentTrack);
+            if (isPlaying) {
+                playMusic();
+            }
+        }
+        
+        // Música anterior
+        function prevTrack() {
+            currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+            loadTrack(currentTrack);
+            if (isPlaying) {
+                playMusic();
+            }
+        }
+        
+        // Event Listeners
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                pauseMusic();
+            } else {
+                playMusic();
+            }
+        });
+        
+        nextBtn.addEventListener('click', nextTrack);
+        prevBtn.addEventListener('click', prevTrack);
+        
+        // Quando a música terminar, tocar a próxima
+        bgMusic.addEventListener('ended', () => {
+            nextTrack();
+        });
+        
+        // Inicializar player
+        window.addEventListener('load', () => {
+            loadTrack(0);
+            // Tentar iniciar automaticamente
+            playMusic();
+        });
+        
+        // PDF viewer functions
+        function openPDF(url, title) {
+    const modal = document.getElementById('pdfModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const pdfViewer = document.getElementById('pdfViewer');
+    
+    // ✨ ADICIONE ESTAS LINHAS AQUI ✨
+    // Iniciar música ao abrir artigo
+    if (!isPlaying) {
+        playMusic();
+    }
+    // ✨ FIM DA ADIÇÃO ✨
+    
+    if (!url || url === 'COLE_O_LINK_DO_PDF_AQUI') {
+                pdfViewer.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 2rem;">
+                        <div>
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">📄</div>
+                            <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">Configure o PDF</h3>
+                            <p style="color: var(--text-secondary); max-width: 500px; line-height: 1.6;">
+                                Para visualizar o PDF, edite o código HTML e substitua 'COLE_O_LINK_DO_PDF_AQUI' 
+                                pelo link real do seu arquivo PDF.
+                            </p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                pdfViewer.innerHTML = `<iframe src="${url}" type="application/pdf"></iframe>`;
+            }
+            
+            modalTitle.textContent = title;
+            modal.classList.add('active');
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('pdfModal');
+            modal.classList.remove('active');
+        }
+        
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // Close modal on click outside
+        document.getElementById('pdfModal').addEventListener('click', (e) => {
+            if (e.target.id === 'pdfModal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

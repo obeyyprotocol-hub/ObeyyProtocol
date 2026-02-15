@@ -3,28 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obey Protocol | Ética Social</title>
+    <title>OBEY PROTOCOL TEAM | ACCESS REQUIRED</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
-        
-        :root {
-            /* ==================== PERSONALIZE O BACKGROUND AQUI ==================== */
-            /* Cole a URL da sua imagem de background entre aspas */
-            --background-image: url('fotos/2.jpeg');
-            /* Ajuste a opacidade do background (0.0 a 1.0) */
-            --background-opacity: 0.15;
-            /* ===================================================================== */
-            
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a28;
-            --accent-cyan: #00ffff;
-            --accent-magenta: #ff00ff;
-            --accent-purple: #8b00ff;
-            --text-primary: #e0e0ff;
-            --text-secondary: #a0a0c0;
-            --grid-color: rgba(0, 255, 255, 0.1);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Audiowide&display=swap');
         
         * {
             margin: 0;
@@ -32,763 +13,944 @@
             box-sizing: border-box;
         }
         
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            position: relative;
+        :root {
+            --matrix-green: #00ff41;
+            --dark-green: #003b00;
+            --toxic-green: #39ff14;
+            --black: #000000;
+            --dark-gray: #0a0a0a;
         }
         
-        /* Custom background image */
-        body::after {
-            content: '';
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: var(--black);
+            color: var(--matrix-green);
+            overflow-x: hidden;
+            overflow-y: auto;
+            cursor: crosshair;
+            min-height: 100vh;
+        }
+        
+        /* Matrix Rain Effect */
+        #matrix-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: var(--background-image);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: var(--background-opacity);
-            pointer-events: none;
             z-index: 1;
+            opacity: 0.8;
         }
         
-        /* Animated background grid */
-        body::before {
-            content: '';
+        /* Noise overlay */
+        .noise-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridScroll 20s linear infinite;
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 65, 0.03) 2px,
+                    rgba(0, 255, 65, 0.03) 4px
+                );
             pointer-events: none;
             z-index: 2;
+            animation: scan 8s linear infinite;
         }
         
-        @keyframes gridScroll {
+        @keyframes scan {
             0% { transform: translateY(0); }
-            100% { transform: translateY(50px); }
+            100% { transform: translateY(100%); }
         }
         
-        /* Glowing orbs background */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-            pointer-events: none;
-            z-index: 3;
-        }
-        
-        .orb1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-cyan);
-            top: -100px;
-            left: -100px;
-            animation: float1 15s ease-in-out infinite;
-        }
-        
-        .orb2 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-magenta);
-            bottom: -50px;
-            right: -50px;
-            animation: float2 20s ease-in-out infinite;
-        }
-        
-        .orb3 {
-            width: 350px;
-            height: 350px;
-            background: var(--accent-purple);
-            top: 50%;
-            left: 50%;
-            animation: float3 18s ease-in-out infinite;
-        }
-        
-        @keyframes float1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(100px, 100px) scale(1.1); }
-        }
-        
-        @keyframes float2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-80px, -80px) scale(0.9); }
-        }
-        
-        @keyframes float3 {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(calc(-50% + 50px), calc(-50% - 50px)) scale(1.2); }
-        }
-        
+        /* Main container */
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
             position: relative;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
         }
         
-        /* Header */
-        header {
-            padding: 2rem 0;
-            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            background: rgba(10, 10, 15, 0.8);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            animation: slideDown 0.8s ease-out;
+        /* Toxic symbol */
+        .toxic-symbol {
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--toxic-green);
+            text-shadow: 
+                0 0 20px var(--toxic-green),
+                0 0 40px var(--toxic-green),
+                0 0 60px var(--toxic-green),
+                0 0 80px rgba(57, 255, 20, 0.5);
+            animation: pulse-toxic 2s ease-in-out infinite, float 4s ease-in-out infinite;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 30px var(--toxic-green));
         }
         
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
+        @keyframes pulse-toxic {
+            0%, 100% { 
+                transform: scale(1);
                 opacity: 1;
             }
+            50% { 
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
         }
         
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+        
+        .toxic-symbol:active {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        /* Logo/Title */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            animation: glitch-in 1s ease-out;
+        }
+        
+        @keyframes glitch-in {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
         }
         
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-            letter-spacing: 3px;
-            animation: glitch 5s infinite;
+            font-family: 'Audiowide', sans-serif;
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            letter-spacing: 0.2rem;
+            color: var(--matrix-green);
+            text-shadow: 
+                0 0 10px var(--matrix-green),
+                0 0 20px var(--matrix-green),
+                0 0 30px var(--toxic-green),
+                2px 2px 0 rgba(0, 255, 65, 0.3);
+            margin-bottom: 0.5rem;
+            position: relative;
+            animation: flicker 0.15s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
+        }
+        
+        /* Glitch effect on hover */
+        h1:hover {
+            animation: glitch 0.3s infinite;
         }
         
         @keyframes glitch {
-            0%, 90%, 100% { transform: translateX(0); }
-            92% { transform: translateX(-2px); }
-            94% { transform: translateX(2px); }
+            0% {
+                transform: translate(0);
+                text-shadow: 
+                    0 0 10px var(--matrix-green),
+                    0 0 20px var(--matrix-green);
+            }
+            20% {
+                transform: translate(-2px, 2px);
+                text-shadow: 
+                    2px 0 0 #ff0000,
+                    -2px 0 0 #00ffff;
+            }
+            40% {
+                transform: translate(-2px, -2px);
+                text-shadow: 
+                    -2px 0 0 #ff0000,
+                    2px 0 0 #00ffff;
+            }
+            60% {
+                transform: translate(2px, 2px);
+                text-shadow: 
+                    2px 2px 0 #ff0000,
+                    -2px -2px 0 #00ffff;
+            }
+            80% {
+                transform: translate(2px, -2px);
+                text-shadow: 
+                    -2px 2px 0 #ff0000,
+                    2px -2px 0 #00ffff;
+            }
+            100% {
+                transform: translate(0);
+                text-shadow: 
+                    0 0 10px var(--matrix-green),
+                    0 0 20px var(--matrix-green);
+            }
         }
         
-        /* Music Player */
-        .music-player {
+        .subtitle {
+            font-size: clamp(0.8rem, 1.8vw, 1rem);
+            letter-spacing: 0.4rem;
+            color: var(--toxic-green);
+            text-shadow: 0 0 10px var(--toxic-green);
+            opacity: 0.9;
+            margin-bottom: 0.3rem;
+        }
+        
+        .warning-text {
+            font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+            color: #ff0000;
+            text-shadow: 0 0 5px #ff0000;
+            letter-spacing: 0.15rem;
+            animation: blink 1.5s infinite;
+            margin-top: 0.5rem;
+        }
+        
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.3; }
+        }
+        
+        /* Terminal box */
+        .terminal {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--matrix-green);
+            border-radius: 5px;
+            padding: 1.2rem;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 65, 0.3),
+                inset 0 0 20px rgba(0, 255, 65, 0.05);
+            margin: 1rem 0;
+            animation: terminal-boot 2s ease-out;
+        }
+        
+        @keyframes terminal-boot {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .terminal-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            background: var(--bg-card);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            border: 1px solid var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            animation: pulse 2s ease-in-out infinite;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--dark-green);
         }
         
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
-        }
-        
-        .music-player button {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-            border: none;
-            width: 40px;
-            height: 40px;
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-            color: white;
-            font-size: 1.2rem;
+            background: var(--matrix-green);
+            box-shadow: 0 0 5px var(--matrix-green);
+            animation: pulse-dot 2s infinite;
         }
         
-        .music-player button:hover {
-            transform: scale(1.1) rotate(10deg);
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
-        .music-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
+        .terminal-title {
+            color: var(--matrix-green);
+            font-size: 0.75rem;
+            letter-spacing: 0.1rem;
         }
         
-        .music-title {
-            font-weight: 600;
-            color: var(--accent-cyan);
-            font-size: 0.9rem;
+        .terminal-content {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
         }
         
-        .music-status {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+        .terminal-line {
+            opacity: 0;
+            animation: type-in 0.5s ease-out forwards;
         }
         
-        /* Main content */
-        main {
-            padding: 4rem 0;
-        }
+        .terminal-line:nth-child(1) { animation-delay: 0.5s; }
+        .terminal-line:nth-child(2) { animation-delay: 1s; }
+        .terminal-line:nth-child(3) { animation-delay: 1.5s; }
+        .terminal-line:nth-child(4) { animation-delay: 2s; }
         
-        .intro {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-        
-        @keyframes fadeIn {
+        @keyframes type-in {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateX(-10px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
         }
         
-        .intro h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+        .prompt {
+            color: var(--toxic-green);
         }
         
-        .intro p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        /* Articles Grid */
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-        
-        .article-card {
-            background: var(--bg-card);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Access button */
+        .access-btn {
+            background: transparent;
+            border: 2px solid var(--matrix-green);
+            color: var(--matrix-green);
+            font-family: 'Audiowide', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            padding: 0.8rem 2.5rem;
+            letter-spacing: 0.2rem;
             cursor: pointer;
             position: relative;
-            animation: cardAppear 0.6s ease-out both;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 
+                0 0 10px rgba(0, 255, 65, 0.3),
+                inset 0 0 10px rgba(0, 255, 65, 0.1);
+            margin-top: 0.5rem;
         }
         
-        .article-card:nth-child(1) { animation-delay: 0.1s; }
-        .article-card:nth-child(2) { animation-delay: 0.2s; }
-        .article-card:nth-child(3) { animation-delay: 0.3s; }
-        .article-card:nth-child(4) { animation-delay: 0.4s; }
-        .article-card:nth-child(5) { animation-delay: 0.5s; }
-        .article-card:nth-child(6) { animation-delay: 0.6s; }
-        
-        @keyframes cardAppear {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        .article-card::before {
+        .access-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(0, 255, 255, 0.1),
-                transparent
-            );
-            transition: left 0.5s ease;
-            z-index: 1;
+            background: var(--matrix-green);
+            transition: left 0.3s ease;
+            z-index: -1;
         }
         
-        .article-card:hover::before {
-            left: 100%;
+        .access-btn:hover::before {
+            left: 0;
         }
         
-        .article-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--accent-cyan);
+        .access-btn:hover {
+            color: var(--black);
             box-shadow: 
-                0 20px 40px rgba(0, 255, 255, 0.3),
-                inset 0 0 20px rgba(0, 255, 255, 0.1);
-        }
-        
-        .article-cover {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
-            transition: transform 0.4s ease;
-        }
-        
-        .article-card:hover .article-cover {
+                0 0 20px var(--matrix-green),
+                0 0 40px var(--toxic-green),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
             transform: scale(1.05);
         }
         
-        .article-content {
-            padding: 1.5rem;
-            position: relative;
-            z-index: 2;
+        .access-btn:active {
+            transform: scale(0.98);
         }
         
-        .article-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--accent-cyan);
-            line-height: 1.3;
-        }
-        
-        .article-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-        }
-        
-        .article-date {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-        
-        .read-btn {
-            padding: 0.5rem 1.5rem;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid var(--accent-cyan);
-            border-radius: 25px;
-            color: var(--accent-cyan);
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .read-btn:hover {
-            background: var(--accent-cyan);
-            color: var(--bg-primary);
-            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
-        }
-        
-        /* PDF Viewer Modal */
-        .modal {
-            display: none;
+        /* Binary code background */
+        .binary-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            width: 90%;
-            max-width: 1200px;
-            height: 90vh;
-            background: var(--bg-card);
-            border-radius: 20px;
-            border: 2px solid var(--accent-cyan);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
-            display: flex;
-            flex-direction: column;
-            animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        @keyframes scaleIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        
-        .modal-header {
-            padding: 1.5rem 2rem;
-            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .modal-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--accent-cyan);
-        }
-        
-        .close-btn {
-            background: rgba(255, 0, 100, 0.2);
-            border: 1px solid #ff0064;
-            color: #ff0064;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .close-btn:hover {
-            background: #ff0064;
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        .pdf-viewer {
-            flex: 1;
-            padding: 0;
+            opacity: 0.05;
+            z-index: 0;
+            font-size: 0.8rem;
+            line-height: 1.2;
             overflow: hidden;
-        }
-        
-        .pdf-viewer iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* Audio visualizer */
-        .visualizer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
             pointer-events: none;
-            z-index: 5;
+            animation: scroll-binary 20s linear infinite;
+        }
+        
+        @keyframes scroll-binary {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--dark-green);
+            letter-spacing: 0.2rem;
+            z-index: 10;
+            opacity: 0.6;
+        }
+        
+        /* Audio Control */
+        .audio-control {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
             display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 3px;
-            padding: 0 20px;
-            opacity: 0.5;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--matrix-green);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
         }
         
-        .bar {
-            width: 4px;
-            background: linear-gradient(to top, var(--accent-cyan), var(--accent-magenta));
-            border-radius: 2px 2px 0 0;
-            animation: wave 1s ease-in-out infinite;
+        .audio-control:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            transform: scale(1.05);
         }
         
-        .bar:nth-child(1) { animation-delay: 0s; }
-        .bar:nth-child(2) { animation-delay: 0.1s; }
-        .bar:nth-child(3) { animation-delay: 0.2s; }
-        .bar:nth-child(4) { animation-delay: 0.3s; }
-        .bar:nth-child(5) { animation-delay: 0.4s; }
-        .bar:nth-child(6) { animation-delay: 0.3s; }
-        .bar:nth-child(7) { animation-delay: 0.2s; }
-        .bar:nth-child(8) { animation-delay: 0.1s; }
-        .bar:nth-child(9) { animation-delay: 0s; }
-        .bar:nth-child(10) { animation-delay: 0.1s; }
-        .bar:nth-child(11) { animation-delay: 0.2s; }
-        .bar:nth-child(12) { animation-delay: 0.3s; }
-        .bar:nth-child(13) { animation-delay: 0.4s; }
-        .bar:nth-child(14) { animation-delay: 0.3s; }
-        .bar:nth-child(15) { animation-delay: 0.2s; }
+        .audio-icon {
+            font-size: 1.2rem;
+            color: var(--matrix-green);
+            animation: pulse-audio 2s infinite;
+        }
         
-        @keyframes wave {
-            0%, 100% { height: 10px; }
-            50% { height: 60px; }
+        .audio-icon.muted {
+            color: #ff0000;
+            animation: none;
+        }
+        
+        @keyframes pulse-audio {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .audio-text {
+            font-size: 0.7rem;
+            color: var(--matrix-green);
+            letter-spacing: 0.1rem;
+        }
+        
+        /* Loading bar */
+        .loading-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 65, 0.1);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            background: var(--matrix-green);
+            box-shadow: 0 0 10px var(--matrix-green);
+            animation: loading 3s ease-in-out infinite;
+        }
+        
+        @keyframes loading {
+            0% {
+                width: 0%;
+                transform: translateX(0);
+            }
+            50% {
+                width: 100%;
+            }
+            100% {
+                width: 100%;
+                transform: translateX(100%);
+            }
         }
         
         /* Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+            
+            .toxic-symbol {
+                font-size: 3rem;
+                margin-bottom: 0.5rem;
+            }
+            
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
+                letter-spacing: 0.15rem;
             }
             
-            .header-content {
-                flex-direction: column;
-                gap: 1.5rem;
+            .subtitle {
+                letter-spacing: 0.2rem;
+                font-size: 0.75rem;
             }
             
-            .articles-grid {
-                grid-template-columns: 1fr;
+            .warning-text {
+                font-size: 0.6rem;
+                letter-spacing: 0.1rem;
             }
             
-            .modal-content {
-                width: 95%;
-                height: 95vh;
+            .terminal {
+                padding: 1rem;
+                margin: 0.8rem 0;
+            }
+            
+            .terminal-content {
+                font-size: 0.75rem;
+                line-height: 1.4;
+            }
+            
+            .access-btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.85rem;
+                letter-spacing: 0.15rem;
+            }
+            
+            .audio-control {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            .audio-icon {
+                font-size: 0.9rem;
+            }
+            
+            .audio-text {
+                font-size: 0.55rem;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .toxic-symbol {
+                font-size: 2.5rem;
+            }
+            
+            .logo-container {
+                margin-bottom: 0.8rem;
+            }
+            
+            .terminal {
+                padding: 0.8rem;
+                margin: 0.5rem 0;
+            }
+            
+            .terminal-header {
+                margin-bottom: 0.6rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .terminal-content {
+                margin-bottom: 0.8rem;
+                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background orbs -->
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-canvas"></canvas>
     
-    <!-- Audio visualizer -->
-    <div class="visualizer">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+    
+    <!-- Audio Control -->
+    <div class="audio-control" id="audioControl">
+        <div class="audio-icon" id="audioIcon">🔊</div>
+        <div class="audio-text">AUDIO ON</div>
     </div>
     
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <h1>☢ OBEY PROTOCOL TEAM</h1>
-                <div class="music-player">
-                    <button id="playPauseBtn" aria-label="Play/Pause">▶</button>
-                    <div class="music-info">
-                        <div class="music-title">Música Ambiente</div>
-                        <div class="music-status" id="musicStatus">Pausado</div>
-                    </div>
-                </div>
-            </div>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Toxic Symbol -->
+        <div class="toxic-symbol">☣</div>
+        
+        <!-- Logo -->
+        <div class="logo-container">
+            <h1>OBEY PROTOCOL</h1>
+            <div class="subtitle">TEAM</div>
+            <div class="warning-text">⚠ RESTRICTED ACCESS ⚠</div>
         </div>
-    </header>
-    
-    <main>
-        <div class="container">
-            <section class="intro">
-                <h2>Portal de Conhecimento Avançado</h2>
-                <p>Sem ética social, não há justiça, apenas poder disfarçado de lei.</p>
-                <p>Onde a ética social é esquecida, a injustiça encontra espaço para crescer.</p>
-                <p>Uma sociedade justa nasce quando a consciência coletiva vale mais que o interesse individual.</p>
-            </section>
+        
+        <!-- Terminal -->
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot"></div>
+                <div class="terminal-dot"></div>
+                <div class="terminal-dot"></div>
+                <div class="terminal-title">SYSTEM_TERMINAL_v2.3.7</div>
+            </div>
             
-            <section>
-                <h2 style="font-family: 'Orbitron', sans-serif; margin-bottom: 2rem; font-size: 2rem; text-align: center;">Artigos Disponíveis</h2>
-                <div class="articles-grid" id="articlesGrid">
-                    <!-- 
-                    ═══════════════════════════════════════════════════════════════
-                    ADICIONE SEUS ARTIGOS AQUI
-                    ═══════════════════════════════════════════════════════════════
-                    Para adicionar um novo artigo, copie e cole o template abaixo:
-                    -->
-                    
-                    <!-- TEMPLATE DE ARTIGO - COPIE DAQUI -->
-                    <div class="article-card" onclick="openPDF('arquivos/New chat.pdf', 'Inimigo Covarde em uma Guerra')">
-                        <img src="fotos/1.jpeg" alt="Capa do artigo" class="article-cover">
-                        <div class="article-content">
-                            <h3>Inimigo Covarde em uma Guerra</h3>
-                            <p>Imagine uma guerra contra um inimigo covarde, cruel e trapaceiro. No
-início, ele acredita apenas na força.</p>
-                            <div class="article-meta">
-                                <span class="article-date">10 Fev 2026</span>
-                                <button class="read-btn">LER</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ATÉ AQUI -->
-                    
-                    <!-- Artigo 2 -->
-                    <div class="article-card" onclick="openPDF('COLE_O_LINK_DO_PDF_AQUI', 'Propulsão Interestelar')">
-                        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&h=400&fit=crop" alt="Capa do artigo" class="article-cover">
-                        <div class="article-content">
-                            <h3>Propulsão Interestelar</h3>
-                            <p>Análise de novos métodos de propulsão para viagens além do sistema solar usando tecnologia de próxima geração</p>
-                            <div class="article-meta">
-                                <span class="article-date">08 Fev 2026</span>
-                                <button class="read-btn">LER</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Artigo 3 -->
-                    <div class="article-card" onclick="openPDF('COLE_O_LINK_DO_PDF_AQUI', 'Física de Buracos Negros')">
-                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800&h=400&fit=crop" alt="Capa do artigo" class="article-cover">
-                        <div class="article-content">
-                            <h3>Física de Buracos Negros</h3>
-                            <p>Novas descobertas sobre a radiação Hawking e singularidades gravitacionais no universo observável</p>
-                            <div class="article-meta">
-                                <span class="article-date">05 Fev 2026</span>
-                                <button class="read-btn">LER</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 
-                    ═══════════════════════════════════════════════════════════════
-                    INSTRUÇÕES PARA ADICIONAR ARTIGOS:
-                    ═══════════════════════════════════════════════════════════════
-                    
-                    1. Copie o TEMPLATE DE ARTIGO acima
-                    2. Cole aqui embaixo
-                    3. Substitua:
-                       - 'COLE_O_LINK_DO_PDF_AQUI' → pelo link do seu PDF
-                       - URL da imagem → link da capa do artigo
-                       - Título do artigo
-                       - Descrição
-                       - Data
-                    
-                    DICA: Para imagens de capa, use:
-                    - Unsplash: https://unsplash.com
-                    - Pexels: https://pexels.com
-                    - Ou hospede suas próprias imagens
-                    ═══════════════════════════════════════════════════════════════
-                    -->
-                    
-                </div>
-            </section>
-        </div>
-    </main>
-    
-    <!-- PDF Viewer Modal -->
-    <div class="modal" id="pdfModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title" id="modalTitle">Visualizador de Artigo</div>
-                <button class="close-btn" onclick="closeModal()">×</button>
+            <div class="terminal-content">
+                <div class="terminal-line"><span class="prompt">></span> Verificando credenciais...</div>
+                <div class="terminal-line"><span class="prompt">></span> Protocolo de segurança ativo</div>
+                <div class="terminal-line"><span class="prompt">></span> Criptografia quântica habilitada</div>
+                <div class="terminal-line"><span class="prompt">></span> Aguardando autorização...</div>
             </div>
-            <div class="pdf-viewer" id="pdfViewer"></div>
+            
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
         </div>
+        
+        <!-- Access Button -->
+        <button class="access-btn" onclick="enterSite()">ACESSAR SISTEMA</button>
     </div>
     
-    <!-- 
-    ═══════════════════════════════════════════════════════════════
-    CONFIGURAÇÃO DA MÚSICA DE FUNDO
-    ═══════════════════════════════════════════════════════════════
-    Cole o link da sua música MP3 abaixo entre aspas
-    Exemplo: <source src="musica-ambiente.mp3" type="audio/mpeg">
-    -->
-    <audio id="bgMusic" loop>
-        <source src="songs/2.mp3" type="audio/mpeg">
-    </audio>
-    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- Footer -->
+    <footer>
+        OBEY_PROTOCOL_2026 | ALL_SYSTEMS_OPERATIONAL
+    </footer>
     
     <script>
-        // toca a música aoós a primeira interação
-document.addEventListener('click', () => {
-    if (!isPlaying) {
-        bgMusic.play();
-        playPauseBtn.textContent = '⏸';
-        musicStatus.textContent = 'Tocando';
-        isPlaying = true;
-    }
-}, { once: true });
-
-        // Music player functionality
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const musicStatus = document.getElementById('musicStatus');
-        const bgMusic = document.getElementById('bgMusic');
-        let isPlaying = false;
+        // ═══════════════════════════════════════════════════════════════
+        // SISTEMA DE ÁUDIO E EFEITOS SONOROS
+        // ═══════════════════════════════════════════════════════════════
         
-        playPauseBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                bgMusic.pause();
-                playPauseBtn.textContent = '▶';
-                musicStatus.textContent = 'Pausado';
-                isPlaying = false;
+        // Audio Context
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+        
+        // Função para criar som de glitch
+        function playGlitch() {
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            // Frequência aleatória para efeito glitch
+            oscillator.frequency.value = Math.random() * 1000 + 100;
+            oscillator.type = 'square';
+            
+            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 0.1);
+        }
+        
+        // Função para som de digitação
+        function playType() {
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+            
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 0.05);
+        }
+        
+        // Função para som de beep do terminal
+        function playBeep() {
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.frequency.value = 1200;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+            
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 0.15);
+        }
+        
+        // Função para som de acesso/entrada
+        function playAccess() {
+            // Primeiro beep
+            const osc1 = audioCtx.createOscillator();
+            const gain1 = audioCtx.createGain();
+            osc1.connect(gain1);
+            gain1.connect(audioCtx.destination);
+            osc1.frequency.value = 600;
+            osc1.type = 'sine';
+            gain1.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain1.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+            osc1.start(audioCtx.currentTime);
+            osc1.stop(audioCtx.currentTime + 0.2);
+            
+            // Segundo beep (mais alto)
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.connect(gain2);
+            gain2.connect(audioCtx.destination);
+            osc2.frequency.value = 900;
+            osc2.type = 'sine';
+            gain2.gain.setValueAtTime(0.12, audioCtx.currentTime + 0.1);
+            gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+            osc2.start(audioCtx.currentTime + 0.1);
+            osc2.stop(audioCtx.currentTime + 0.4);
+        }
+        
+        // Som ambiente contínuo (drone)
+        let ambientOscillator = null;
+        let ambientGain = null;
+        let isAmbientPlaying = false;
+        
+        function startAmbient() {
+            if (isAmbientPlaying) return;
+            
+            ambientOscillator = audioCtx.createOscillator();
+            ambientGain = audioCtx.createGain();
+            
+            ambientOscillator.connect(ambientGain);
+            ambientGain.connect(audioCtx.destination);
+            
+            ambientOscillator.frequency.value = 55; // Nota grave
+            ambientOscillator.type = 'sine';
+            
+            ambientGain.gain.setValueAtTime(0, audioCtx.currentTime);
+            ambientGain.gain.linearRampToValueAtTime(0.02, audioCtx.currentTime + 2);
+            
+            ambientOscillator.start();
+            isAmbientPlaying = true;
+            
+            // Variação na frequência para efeito de tensão
+            setInterval(() => {
+                if (ambientOscillator && isAmbientPlaying) {
+                    ambientOscillator.frequency.setValueAtTime(
+                        55 + Math.random() * 5,
+                        audioCtx.currentTime
+                    );
+                }
+            }, 3000);
+        }
+        
+        function stopAmbient() {
+            if (ambientOscillator && isAmbientPlaying) {
+                ambientGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
+                setTimeout(() => {
+                    ambientOscillator.stop();
+                    isAmbientPlaying = false;
+                }, 1000);
+            }
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        
+        // Matrix Effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        // Binary characters
+        const binary = '01';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * canvas.height / fontSize;
+        }
+        
+        function drawMatrix() {
+            // Semi-transparent black to create trail effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                // Random binary character
+                const text = binary[Math.floor(Math.random() * binary.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                // Reset drop to top randomly
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        // Animate
+        setInterval(drawMatrix, 50);
+        
+        // Resize canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // CONFIGURE O LINK DO SEU SITE OFICIAL AQUI
+        // ═══════════════════════════════════════════════════════════════
+        function enterSite() {
+            playAccess(); // Som de acesso
+            
+            // Efeito visual de entrada
+            document.body.style.transition = 'opacity 0.5s';
+            document.body.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Substitua 'site-artigos-futurista.html' pelo link do seu site
+                window.location.href = 'main/index2.html';
+                
+                // Ou use um link externo:
+                // window.location.href = 'https://seusite.com';
+            }, 500);
+        }
+        // ═══════════════════════════════════════════════════════════════
+        
+        // Efeitos sonoros nos elementos
+        const btn = document.querySelector('.access-btn');
+        const h1 = document.querySelector('h1');
+        const toxicSymbol = document.querySelector('.toxic-symbol');
+        
+        // Som no hover do botão
+        btn.addEventListener('mouseenter', () => {
+            playBeep();
+        });
+        
+        // Som no hover do logo
+        h1.addEventListener('mouseenter', () => {
+            playGlitch();
+        });
+        
+        // Som no hover do símbolo tóxico
+        toxicSymbol.addEventListener('mouseenter', () => {
+            playGlitch();
+        });
+        
+        // Easter egg: Som de alerta ao clicar no símbolo tóxico
+        toxicSymbol.addEventListener('click', () => {
+            // Som de alarme/alerta
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.frequency.value = 800 + (i * 200);
+                    osc.type = 'sawtooth';
+                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start(audioCtx.currentTime);
+                    osc.stop(audioCtx.currentTime + 0.3);
+                }, i * 150);
+            }
+            
+            // Efeito visual de shake
+            toxicSymbol.style.animation = 'none';
+            setTimeout(() => {
+                toxicSymbol.style.animation = '';
+            }, 10);
+        });
+        
+        // Glitch effect on logo randomly com som
+        setInterval(() => {
+            const h1 = document.querySelector('h1');
+            h1.style.animation = 'none';
+            playGlitch(); // Som de glitch aleatório
+            setTimeout(() => {
+                h1.style.animation = '';
+            }, 10);
+        }, 8000);
+        
+        // Sons de digitação nas linhas do terminal
+        const terminalLines = document.querySelectorAll('.terminal-line');
+        terminalLines.forEach((line, index) => {
+            setTimeout(() => {
+                playType();
+            }, (index + 1) * 500);
+        });
+        
+        // Iniciar som ambiente após interação do usuário
+        let audioInitialized = false;
+        function initAudio() {
+            if (!audioInitialized) {
+                audioCtx.resume();
+                startAmbient();
+                audioInitialized = true;
+                playBeep(); // Beep de confirmação
+            }
+        }
+        
+        // Inicializar áudio com qualquer interação
+        document.addEventListener('click', initAudio, { once: true });
+        document.addEventListener('keydown', initAudio, { once: true });
+        
+        // Controle de mute
+        const audioControl = document.getElementById('audioControl');
+        const audioIcon = document.getElementById('audioIcon');
+        const audioText = audioControl.querySelector('.audio-text');
+        let isMuted = false;
+        
+        audioControl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isMuted = !isMuted;
+            
+            if (isMuted) {
+                stopAmbient();
+                audioIcon.textContent = '🔇';
+                audioIcon.classList.add('muted');
+                audioText.textContent = 'AUDIO OFF';
+                audioText.style.color = '#ff0000';
             } else {
-                bgMusic.play().catch(e => {
-                    alert('Adicione o link da música no código HTML na seção <audio>');
-                });
-                playPauseBtn.textContent = '⏸';
-                musicStatus.textContent = 'Tocando';
-                isPlaying = true;
+                if (audioInitialized) {
+                    startAmbient();
+                }
+                audioIcon.textContent = '🔊';
+                audioIcon.classList.remove('muted');
+                audioText.textContent = 'AUDIO ON';
+                audioText.style.color = 'var(--matrix-green)';
+                playBeep();
             }
         });
         
-        // PDF viewer functions
-        function openPDF(url, title) {
-            const modal = document.getElementById('pdfModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const pdfViewer = document.getElementById('pdfViewer');
-            
-            if (!url || url === 'COLE_O_LINK_DO_PDF_AQUI') {
-                pdfViewer.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 2rem;">
-                        <div>
-                            <div style="font-size: 4rem; margin-bottom: 1rem;">📄</div>
-                            <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">Configure o PDF</h3>
-                            <p style="color: var(--text-secondary); max-width: 500px; line-height: 1.6;">
-                                Para visualizar o PDF, edite o código HTML e substitua 'COLE_O_LINK_DO_PDF_AQUI' 
-                                pelo link real do seu arquivo PDF.
-                            </p>
-                        </div>
-                    </div>
-                `;
-            } else {
-                pdfViewer.innerHTML = `<iframe src="${url}" type="application/pdf"></iframe>`;
-            }
-            
-            modalTitle.textContent = title;
-            modal.classList.add('active');
-        }
+        // Modificar funções de som para checar se está muted
+        const originalPlayGlitch = playGlitch;
+        playGlitch = function() {
+            if (!isMuted) originalPlayGlitch();
+        };
         
-        function closeModal() {
-            const modal = document.getElementById('pdfModal');
-            modal.classList.remove('active');
-        }
+        const originalPlayType = playType;
+        playType = function() {
+            if (!isMuted) originalPlayType();
+        };
         
-        // Close modal on ESC key
+        const originalPlayBeep = playBeep;
+        playBeep = function() {
+            if (!isMuted) originalPlayBeep();
+        };
+        
+        const originalPlayAccess = playAccess;
+        playAccess = function() {
+            if (!isMuted) originalPlayAccess();
+        };
+        
+        // Som ao pressionar teclas
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-        
-        // Close modal on click outside
-        document.getElementById('pdfModal').addEventListener('click', (e) => {
-            if (e.target.id === 'pdfModal') {
-                closeModal();
+            if (e.key === 'Enter') {
+                enterSite();
+            } else {
+                playType();
             }
         });
     </script>
